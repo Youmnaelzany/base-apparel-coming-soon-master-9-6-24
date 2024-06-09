@@ -1,0 +1,114 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '@/styles/globals.css';
+---
+
+<Layout title='Base Apparel coming soon page.'>
+  <main class='relative z-50'>
+    <section class='m-8 md:mx-[10.31rem] md:mt-[4.88rem]'>
+      <img src='/public/images/logo.svg' alt='logo' class='' />
+    </section>
+    <section
+      class='md:flex md:flex-row-reverse md:items-center md:justify-between'
+    >
+      <section class='md:relative md:top-[-8.938rem]'>
+        <picture>
+          <source
+            media='(min-width: 768px)'
+            srcset='/public/images/hero-desktop.jpg'
+          />
+          <img src='/public/images/hero-mobile.jpg' alt='' class='' />
+        </picture>
+      </section>
+      <section
+        class='mx-8 mb-[5.75rem] mt-16 flex flex-col items-center justify-center gap-4 text-center md:mx-[10.31rem] md:mb-[16rem] md:items-start md:text-left'
+      >
+        <img
+          src='/public/images/bg-pattern-desktop.svg'
+          alt='pattern'
+          class='absolute left-0 top-[-4.688rem] -z-50 hidden md:flex'
+        />
+        <h1
+          class='w-[19.4375rem] text-[2.5rem] font-semibold leading-[2.625rem] tracking-[0.67656rem] text-[#423A3A] md:w-[27.75rem] md:text-[4rem] md:leading-[4.4375rem] md:tracking-[1.08256rem]'
+        >
+          <span class='font-light text-[#CE9898]'>We're </span>coming soon
+        </h1>
+        <p
+          class='mb-4 text-sm font-normal leading-snug text-[#CE9898] md:w-[27.75rem] md:text-base'
+        >
+          Hello fellow shoppers! We're currently building our new fashion store.
+          Add your email below to stay up-to-date with announcements and our
+          launch deals.
+        </p>
+        <form action=''>
+          <div class='relative'>
+            <input
+              type='email'
+              name=''
+              id=''
+              placeholder='Email Address'
+              class='h-12 w-[19.4375rem] rounded-[1.75rem] border border-solid border-[#CE9898] bg-transparent pl-8 text-sm font-normal leading-7 text-[#423A3A] outline-none placeholder:text-[#CE9898]/50 md:h-14 md:w-[27.8125rem]'
+            />
+            <img
+              src='/public/images/icon-error.svg'
+              alt='error icon'
+              id='errorIcon'
+              class='absolute right-[4.438rem] top-[0.813rem] hidden'
+            />
+            <span
+              class='absolute -bottom-6 left-6 hidden text-sm font-normal leading-normal text-[#F96464]'
+              id='errorMsg'>Please provide a valid email</span
+            >
+            <button
+              type='submit'
+              class='mf:h-14 absolute right-0 top-0 flex h-12 w-16 items-center justify-center rounded-[1.75rem] bg-[#f5b1b1] md:w-[6.25rem]'
+            >
+              <img src='/public/images/icon-arrow.svg' alt='arrow' class='' />
+            </button>
+          </div>
+        </form>
+      </section>
+    </section>
+  </main>
+</Layout>
+
+<style is:inline>
+  body {
+    background: linear-gradient(150deg, #fff 0%, #fff4f4 84.51%);
+  }
+</style>
+
+<script is:inline>
+  const emailInput = document.querySelector('input[type="email"]');
+  const errorIcon = document.querySelector('#errorIcon');
+  const errorMsg = document.querySelector('#errorMsg');
+  const submitBtn = document.querySelector('button[type="submit"]');
+  const emailRegex =
+    /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
+  function validateEmail() {
+    const email = emailInput.value.trim();
+
+    if (!emailRegex.test(email)) {
+      errorIcon.classList.remove('hidden');
+      errorMsg.classList.remove('hidden');
+      emailInput.classList.add('border-red-500');
+    } else {
+      clearErrorState();
+    }
+  }
+
+  function clearErrorState() {
+    errorIcon.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+    emailInput.classList.remove('border-red-500');
+  }
+
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    validateEmail();
+  });
+
+  emailInput.addEventListener('input', validateEmail);
+  emailInput.addEventListener('focus', clearErrorState);
+</script>
